@@ -8,28 +8,27 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 /* Configure MySQL DBMS */
-/*const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'michaelort',
-    password: 'michaelort',
-    database: 'quotes_db'
+const connection = mysql.createConnection({
+    host: 'ptuxc6zu2x2f140p@un0jueuv2mam78uv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'nq4rrxfcgniebb03',
+    password: 'ptuxc6zu2x2f140p',
+    database: 'tobmch4scnkm51x5'
 });
 connection.connect();
-*/
+
 /* The handler for the DEFAULT route */
 app.get('/', function(req, res){
-    /*var stmt = 'SELECT DISTINCT category FROM l9_quotes';
+    var stmt = 'SELECT DISTINCT category FROM l9_quotes';
     connection.query(stmt, function(error, results){
         if(error) throw error;
         
         var category = results;
         res.render('home', {category: category});      
-    });*/
-    res.render('home');
+    });
 });
 
 /* The handler for the /author route */
-/*app.get('/quotes', function(req, res){
+app.get('/quotes', function(req, res){
     
     var category = req.query.categorySelect;
     var keyWord = req.query.keyword;
@@ -69,10 +68,10 @@ app.get('/', function(req, res){
         res.render('quotes',{quotes: ''});
     }
     
-});*/
+});
 
 /* The handler for the /author/name/id route */
-/*app.get('/author/:aid', function(req, res){
+app.get('/author/:aid', function(req, res){
 
     var stmt = 'select * from l9_author where l9_author.authorId=\'' 
                 + req.params.aid + '\';'
@@ -87,7 +86,7 @@ app.get('/', function(req, res){
 	    }
 	    res.render('author', {author: author});
 	});
-});*/
+});
 
 /* The handler for undefined routes */
 app.get('*', function(req, res){
