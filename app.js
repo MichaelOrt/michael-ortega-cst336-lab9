@@ -50,7 +50,7 @@ app.get('/quotes', function(req, res){
     }else if(gender.length && gender != 'none'){
         stmt = "SELECT quote, firstName, lastName, l9_author.authorId as aid "+
         "FROM l9_quotes, l9_author "+
-        "WHERE sex='F' and l9_author.authorId=l9_quotes.authorId;";
+        "WHERE sex='"+gender+"' and l9_author.authorId=l9_quotes.authorId;";
     }else if(firstName.length && lastName.length){
          stmt = 'select quote, firstName, lastName, l9_author.authorId as aid  ' +
                'from l9_quotes, l9_author ' +
