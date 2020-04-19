@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 
 /* Configure MySQL DBMS */
 const connection = mysql.createConnection({
-    host: 'ptuxc6zu2x2f140p@un0jueuv2mam78uv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    host: 'un0jueuv2mam78uv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     user: 'nq4rrxfcgniebb03',
     password: 'ptuxc6zu2x2f140p',
     database: 'tobmch4scnkm51x5'
