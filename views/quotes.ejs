@@ -1,0 +1,26 @@
+<%- include ('templates/header'); -%>
+
+<div class='container'>
+    <div class='jumbotron'>
+        <h1 style='text-align:center;'> FOUND Quotes </h1>
+        <div class='row'>
+            <div class='col-sm-4'></div>
+            <button class='col-sm-4 btn btn-info btn-block'onclick='location.href="/";'>Search Again</button>
+            <div class='col-sm-4'></div>
+        </div>
+    </div>
+    
+    <h3>Quotes</h3>
+     <%if(!quotes){%>
+            <h1 class='col-sm-12 notfound'>CANNOT FIND QUOTES !!!</h1>
+        <%}
+        else{%>
+    <ul>
+        <%quotes.forEach(function(q){%>
+            <li><%=q.quote%> by <a href='/author/<%=q.aid%>'><%=q.firstName%> <%=q.lastName%></a></li>
+        <%});%>
+    </ul>
+       <%}%>
+</div>
+
+<%- include ('templates/footer'); -%>

@@ -1,0 +1,58 @@
+<%- include ('templates/header'); -%>
+
+<div class='container'>
+	<div class='jumbotron'>
+		<h1> POPULAR QUOTES </h1>
+		<form action='/quotes' method='GET'>
+			<div class='form-group row'>
+				<label class='col-sm-4 col-form-label'>Search by keyword</label>
+				<div class='col-sm-4'>
+					<input type='text' id='keyword' name='keyword' placeholder='life' >
+				</div>
+			</div>
+			<div class='form-group row'>
+				<label for='lastname' class='col-sm-4 col-form-label'>Search By Category</label>
+				<div class='col-sm-4'>
+					<select name="categorySelect">
+						<option value'none'></option>
+						<%category.forEach(function(v){%>
+						<option value="<%=v.category%>"><%=v.category%></option>
+						<%});%>
+					</select>
+				</div>
+			</div>
+			<div class='form-group row'>
+				<label for='lastname' class='col-sm-4 col-form-label'>Search by gender</label>
+				<div class='col-sm-4'>
+					<select name="genderSelect">
+						<option value="none"></option>
+						<option value='m'>male</option>
+						<option value='f'>female</option>
+					</select>
+				</div>
+			</div>
+			<div class='form-group row'>
+				<label for='firstname' class='col-sm-4 col-form-label'>First Name</label>
+				<div class='col-sm-4'>
+					<input type='text' class='form-control' id='firstname' name='firstname' placeholder='Jane' >
+				</div>
+			</div>
+			<div class='form-group row'>
+				<label for='lastname' class='col-sm-4 col-form-label'>Last Name</label>
+				<div class='col-sm-4'>
+					<input type='text' class='form-control' id='lastname' name='lastname' placeholder='Doe' >
+				</div>
+			</div>
+				<div class='form-group row'>
+				<div class='col-sm-4'></div>
+				<div class='col-sm-4'>
+					<button class='btn btn-primary btn-block'>Search Author</button>
+				</div>
+				<div class='col-sm-4'></div>
+			</div>
+		</form>
+		
+	</div>
+</div>
+
+<%- include ('templates/footer'); -%>
