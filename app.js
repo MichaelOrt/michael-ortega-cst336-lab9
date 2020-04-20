@@ -45,7 +45,7 @@ app.get('/quotes', function(req, res){
     }else if(category.length){
         stmt = "SELECT quote, firstName, lastName, l9_author.authorId as aid " +
         "FROM l9_quotes, l9_author " +
-        "WHERE category='life' and " +
+        "WHERE category="+category+" and " +
         "l9_author.authorId=l9_quotes.authorId;";
     }else if(gender.length && gender != 'none'){
         stmt = "SELECT quote, firstName, lastName, l9_author.authorId as aid "+
