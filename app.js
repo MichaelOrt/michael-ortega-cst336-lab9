@@ -35,10 +35,7 @@ function isAuthenticated(req, res, next){
     if(!req.session.authenticated) res.redirect('/login');
     else next();
 }
-app.get('/logout', function(req, res){
-   req.session.destroy();
-   res.redirect('/');
-});
+
 function checkUsername(username){
     
     let stmt = 'SELECT * FROM users WHERE username=?';
@@ -171,19 +168,19 @@ app.get('/quotes', function(req, res){
     }
     
 });
-app.get('/author/new', isAuthenticated,function(req, res){
+app.get('/author/new', function(req, res){
     res.render('author_new');
 });
 
 /* Create a new author - Add author into DBMS */
-app.post('/author/new', isAuthenticated,function(req, res){
+app.post('/author/new', function(req, res){
    //console.log(req.body);
    connection.query('SELECT COUNT(*) FROM l9_author;', function(error, result){
        if(error) throw error;
        if(result.length){
             var authorId = result[0]['COUNT(*)'] + 1;
             var stmt = 'INSERT INTO l9_author ' +
-                      '(authorId, firstName, lastName, dob, dod, sex, profession, country, biography) '+
+                      '(authorId, firstName, lastName, dob, dod, sex, profession, country, portrait, biography) '+
                       'VALUES ' +
                       '(' + 
                        authorId + ',"' +
@@ -194,6 +191,7 @@ app.post('/author/new', isAuthenticated,function(req, res){
                        req.body.sex + '","' +
                        req.body.profession + '","' +
                        req.body.country + '","' +
+                       req.body.portrait + '","' +
                        req.body.biography + '"' +
                        ');';
             console.log(stmt);
@@ -204,16 +202,16 @@ app.post('/author/new', isAuthenticated,function(req, res){
        }
    });
 });
-app.get('/author/:aid/edit', isAuthenticated,function(req, res){
+
+app.get('/author/:aid/edit', function(req, res){
     var stmt = 'SELECT * FROM l9_author WHERE authorId=' + req.params.aid + ';';
     connection.query(stmt, function(error, results){
        if(error) throw error;
        if(results.length){
            var author = results[0];
            author.dob = author.dob.toISOString().split('T')[0];
-           if(author.dod != '0000-00-00'){
-              author.dod = author.dod.toISOString().split('T')[0];
-              
+           if(author.dod != 'present'){
+              // author.dod = author.dod.toISOString().split('T')[0];
            }
            res.render('author_edit', {author: author});
        }
@@ -221,7 +219,7 @@ app.get('/author/:aid/edit', isAuthenticated,function(req, res){
 });
 
 /* Edit an author record - Update an author in DBMS */
-app.put('/author/:aid', isAuthenticated,function(req, res){
+app.put('/author/:aid', function(req, res){
     console.log(req.body);
     var stmt = `UPDATE l9_author SET firstName = '${req.body.firstname}',`+
     `lastName = '${req.body.lastname}', dob = '${req.body.dob}',`+
@@ -259,7 +257,6 @@ app.get('/author/:aid/delete', function(req, res){
         res.redirect('/adminHome');
     });
 });
-
 /* The handler for undefined routes */
 app.get('*', function(req, res){
    res.render('error'); 
